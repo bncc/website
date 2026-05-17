@@ -10,7 +10,7 @@ Luca's personal homepage. Single HTML file (`index.html`) wrapped in a tiny Expr
 
 - **Repo:** `bncc/website` on GitHub (public).
 - **Host:** Railway, auto-deploy from `main`.
-- **Domain:** a Namecheap-registered domain points at the Railway service (see Railway dashboard for the exact domain in use).
+- **Domain:** `lucapuccini.eu` (Namecheap, `.eu` TLD) points at the Railway service. Namecheap doesn't offer ALIAS on `.eu`, so the apex uses an A record to Railway's anycast IP; `www` is a CNAME.
 - **Server:** `server.js` is Express. It serves the directory as static files and exposes `/healthz`. Listens on `process.env.PORT` (Railway sets this) or `3000` locally.
 
 Local dev:
