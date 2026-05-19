@@ -1,6 +1,6 @@
 # website
 
-Luca's personal homepage. A single HTML file (`index.html`) served as a pure static site on Cloudflare Pages.
+Luca's personal homepage. A single HTML file (`index.html`) served as a pure static site on Cloudflare.
 
 ## Aesthetic — do not modernize
 
@@ -9,7 +9,7 @@ Luca's personal homepage. A single HTML file (`index.html`) served as a pure sta
 ## Hosting
 
 - **Repo:** `bncc/website` on GitHub (public).
-- **Host:** Cloudflare Pages, auto-deploy from `main`. No build step — Pages serves the repo root as static files.
+- **Host:** Cloudflare, deployed from Git as a **Worker with static assets** (not a classic Pages project — the URL is `*.workers.dev`, not `*.pages.dev`). Account subdomain: `luca-puccini`. Auto-deploys from `main`, no build step — the repo root is served as static files.
 - **Domain:** `lucapuccini.eu` (Namecheap, `.eu` TLD).
 
 Local preview (no install):
@@ -23,11 +23,10 @@ Or just open `index.html` directly in a browser — there is no server-side code
 
 ## Planned next phase: persistence
 
-The counter and guestbook are currently browser-memory only — they reset on every load. The plan is **Cloudflare Workers Functions + D1** (SQLite), all on the free tier:
+The counter and guestbook are currently browser-memory only — they reset on every load. The plan is to add a small **Worker script + Cloudflare D1** (SQLite), all on the free tier:
 
-- `functions/counter.js`   → `GET` returns count, `POST` increments
-- `functions/guestbook.js` → `GET` returns list, `POST` appends
-- Bind a D1 database in the Pages project settings; tables: `counter`, `guestbook`
+- The Worker handles `/counter` and `/guestbook` (GET reads, POST writes) and falls through to static assets for everything else.
+- Bind a D1 database to the Worker; tables: `counter`, `guestbook`.
 
 The frontend JS in `index.html` will be swapped from in-memory arrays to `fetch("/counter")` / `fetch("/guestbook")` calls.
 
@@ -39,7 +38,6 @@ The frontend JS in `index.html` will be swapped from in-memory arrays to `fetch(
 index.html      — the whole site (HTML + CSS + JS, all inline)
 .gitignore      — .env, .DS_Store, miscellaneous junk
 CLAUDE.md       — this file
-functions/      — (phase 2) Cloudflare Workers route handlers
 ```
 
 No build step. No bundler. No framework. No server. Keep it that way.
