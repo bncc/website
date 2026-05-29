@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Luca Puccini — Engineering Manager</title>
+  <title>Luca's Home Page — 1996 Edition</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Luca Puccini — engineering manager building calm, dependable platform teams. Berlin." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <meta name="description" content="The 1996 edition of Luca Puccini's homepage. Best viewed in Netscape Navigator 4.0." />
   <style>
     html, body, #root { height: 100%; margin: 0; }
     * { box-sizing: border-box; }
-    body { background: #15130f; }
+    body { background: #0c0d11; }
   </style>
 
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -22,17 +19,11 @@
   <div id="root"></div>
 
   <script src="content.js"></script>
-  <script type="text/babel" src="variation-3.jsx"></script>
+  <script type="text/babel" src="variation-1.jsx"></script>
 
   <script type="text/babel" data-presets="react">
-    // Baked-in look: dark graphite + navy accent (the version you settled on)
-    document.body.dataset.mode = "dark";
-    document.body.dataset.tint = "graphite";
-    document.documentElement.style.setProperty("--accent-v2-accent", "#2a4a6a");
-    document.documentElement.style.setProperty("--density", 1);
-
     ReactDOM.createRoot(document.getElementById("root"))
-      .render(<Variation3 retroHref="1996.html" />);
+      .render(<Variation1 backHref="index.html" />);
   </script>
 </body>
 </html>
