@@ -15,7 +15,7 @@ window.SITE = {
   initials: "LP",
   roleShort: "Engineering Manager",
   location: "Hamburg, DE",
-  locationShort: "Hamburg · CET",
+  locationShort: "Hamburg",
   email: "me@lucapuccini.eu",
   domain: "lucapuccini.eu",
   photo: null, // set to "img/profile.jpg" once you've dropped the picture in img/

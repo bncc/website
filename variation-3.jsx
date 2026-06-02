@@ -12,6 +12,15 @@
 //   - Section numbers (§ 01), mono kickers, small caps — vintage hints
 //   - Modern grid: hero · expertise · selected work · references · contact
 
+function berlinTz() {
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Berlin",
+    timeZoneName: "longOffset",
+  });
+  const tz = fmt.formatToParts(new Date()).find(p => p.type === "timeZoneName").value;
+  return tz.includes("+02") ? "CEST" : "CET";
+}
+
 function Variation3({ onWarp, retroHref }) {
   const C = window.SITE;
   return (
@@ -44,7 +53,7 @@ function Variation3({ onWarp, retroHref }) {
             <div className="m3-hero-text">
               <div className="m3-availability">
                 <span className="m3-dot" />
-                <span>{C.locationShort}</span>
+                <span>{C.locationShort} · {berlinTz()}</span>
               </div>
 
               <h1 className="m3-h1" dangerouslySetInnerHTML={{ __html: C.hero.headline }} />
