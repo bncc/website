@@ -42,8 +42,6 @@ function Variation3({ onWarp, retroHref }) {
         <section className="m3-hero">
           <div className="m3-availability">
             <span className="m3-dot" />
-            <span>{C.availability}</span>
-            <span className="m3-availability-sep">/</span>
             <span>{C.locationShort}</span>
           </div>
 

@@ -3,6 +3,7 @@ npm-debug.log*
 .env
 .env.*
 .DS_Store
+*.pdf
 
 # wrangler files
 .wrangler
