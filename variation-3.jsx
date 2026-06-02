@@ -142,7 +142,7 @@ function Variation3({ onWarp, retroHref }) {
             <div className="m3-contact-left">
               <h2 className="m3-h2">Let's <em>talk.</em></h2>
               <p className="m3-contact-blurb">
-                Email is best — I read everything, and reply to most things within a week. I'm currently open to advisory work, fractional engineering leadership, and the occasional speaking engagement.
+                Email is best — I read everything, and reply to most things within a week. Not looking for work, advisory, or speaking gigs right now. Happy to swap notes on engineering management, or just say hi.
               </p>
               <a href={"mailto:" + C.email} className="m3-btn m3-btn-large">
                 {C.email}
