@@ -151,7 +151,7 @@ function Variation3({ onWarp, retroHref }) {
           <div className="m3-foot-meta">
             <span>© MMXXVI</span>
             <span className="m3-foot-sep">·</span>
-            <span>Made in Berlin</span>
+            <span>Proudly made in Hansestadt Hamburg</span>
             <span className="m3-foot-sep">·</span>
             {retroHref ? (
               <a
