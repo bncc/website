@@ -18,6 +18,7 @@ window.SITE = {
   locationShort: "Hamburg · CET",
   email: "me@lucapuccini.eu",
   domain: "lucapuccini.eu",
+  photo: null, // set to "img/profile.jpg" once you've dropped the picture in img/
   /* Contact / social links (shared) */
   links: [
     { label: "Email",    value: "me@lucapuccini.eu",           href: "mailto:me@lucapuccini.eu" },
@@ -29,7 +30,7 @@ window.SITE = {
 
   /* ════ MODERN SITE ════ */
   hero: {
-    headline: "A team's work is a direct <em>reflection</em> of its environment — my job is building it.",
+    headline: "The teams I've seen do their best work all had the right <em>environment.</em> My job is to build it.",
     lede: "Engineering manager with a solid technical base. Ten years leading diverse, multicultural teams in Hamburg and remote — across e-commerce, digitalization, and media. Focused on people development and the conditions that let engineers do their best work.",
   },
 

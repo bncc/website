@@ -40,23 +40,33 @@ function Variation3({ onWarp, retroHref }) {
 
         {/* ──────────── HERO ──────────── */}
         <section className="m3-hero">
-          <div className="m3-availability">
-            <span className="m3-dot" />
-            <span>{C.locationShort}</span>
-          </div>
+          <div className={"m3-hero-grid" + (C.photo ? "" : " m3-hero-grid-solo")}>
+            <div className="m3-hero-text">
+              <div className="m3-availability">
+                <span className="m3-dot" />
+                <span>{C.locationShort}</span>
+              </div>
 
-          <h1 className="m3-h1" dangerouslySetInnerHTML={{ __html: C.hero.headline }} />
+              <h1 className="m3-h1" dangerouslySetInnerHTML={{ __html: C.hero.headline }} />
 
-          <p className="m3-lede">{C.hero.lede}</p>
+              <p className="m3-lede">{C.hero.lede}</p>
 
-          <div className="m3-hero-actions">
-            <a href="#work" className="m3-btn">
-              See selected work
-              <span className="m3-btn-arr">→</span>
-            </a>
-            <a href={"mailto:" + C.email} className="m3-btn m3-btn-ghost">
-              Get in touch
-            </a>
+              <div className="m3-hero-actions">
+                <a href="#work" className="m3-btn">
+                  See selected work
+                  <span className="m3-btn-arr">→</span>
+                </a>
+                <a href={"mailto:" + C.email} className="m3-btn m3-btn-ghost">
+                  Get in touch
+                </a>
+              </div>
+            </div>
+
+            {C.photo && (
+              <div className="m3-hero-photo">
+                <img src={C.photo} alt={C.name} />
+              </div>
+            )}
           </div>
 
           <div className="m3-hero-stats">
@@ -69,7 +79,7 @@ function Variation3({ onWarp, retroHref }) {
           <div className="m3-sec-grid">
             <h2 className="m3-h2">What I'm <em>good at.</em></h2>
             <p className="m3-sec-blurb">
-              Twelve years of doing this gives you a shape. Mine is here — the work I take on, and the work I send elsewhere.
+              Twenty years of doing this gives you a shape. Mine is here — the work I take on, and the work I send elsewhere.
             </p>
           </div>
 
@@ -533,6 +543,33 @@ body[data-mode="dark"] .m3-quote:hover {
 .m3-hero {
   padding: 96px 0 80px;
   border-bottom: 1px solid var(--m3-rule-soft);
+}
+.m3-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 64px;
+  align-items: start;
+}
+.m3-hero-grid-solo { grid-template-columns: 1fr; }
+.m3-hero-text { min-width: 0; }
+.m3-hero-photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--m3-card);
+  border: 1px solid var(--m3-rule);
+  position: sticky;
+  top: 32px;
+}
+.m3-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.1) contrast(0.98);
+}
+@media (max-width: 880px) {
+  .m3-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .m3-hero-photo { width: 220px; position: static; justify-self: start; order: -1; }
 }
 .m3-availability {
   display: inline-flex;
