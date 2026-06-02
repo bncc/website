@@ -72,7 +72,7 @@ function Variation1({ onBack, backHref }) {
               </h1>
               <p className="v1-tagline">
                 <i>~*~ a humble corner of the world wide web ~*~</i><br/>
-                <b>engineering manager</b> &bull; <b>occasional writer</b> &bull; <b>est. 2026</b>
+                <b>engineering manager</b> &bull; <b>occasional writer</b> &bull; <b>est. 2026</b> &bull; <span title="Made in the European Union">🇪🇺</span>
               </p>
               <hr className="v1-hr-fancy" />
               {/* Navigation */}

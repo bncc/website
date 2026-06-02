@@ -163,7 +163,26 @@ function Variation3({ onWarp, retroHref }) {
           <div className="m3-foot-meta">
             <span>© MMXXVI</span>
             <span className="m3-foot-sep">·</span>
-            <span>Proudly made in Hansestadt Hamburg</span>
+            <span className="m3-foot-geo">
+              Proudly made in Hansestadt Hamburg
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60" width="18" height="12" aria-label="EU" className="m3-foot-flag">
+                <rect width="90" height="60" fill="#003399"/>
+                <g fill="#FFCC00">
+                  <circle cx="45" cy="10" r="3"/>
+                  <circle cx="55" cy="13" r="3"/>
+                  <circle cx="62" cy="20" r="3"/>
+                  <circle cx="65" cy="30" r="3"/>
+                  <circle cx="62" cy="40" r="3"/>
+                  <circle cx="55" cy="47" r="3"/>
+                  <circle cx="45" cy="50" r="3"/>
+                  <circle cx="35" cy="47" r="3"/>
+                  <circle cx="28" cy="40" r="3"/>
+                  <circle cx="25" cy="30" r="3"/>
+                  <circle cx="28" cy="20" r="3"/>
+                  <circle cx="35" cy="13" r="3"/>
+                </g>
+              </svg>
+            </span>
             <span className="m3-foot-sep">·</span>
             {retroHref ? (
               <a
@@ -393,11 +412,6 @@ body[data-mode="dark"] .m3-inline-link {
 }
 
 /* Inverted chips/buttons need their fills flipped so cream sits on dark */
-body[data-mode="dark"] .m3-mark-glyph,
-body[data-mode="dark"] .m3-foot-glyph {
-  background: var(--m3-ink);
-  color: var(--m3-bg);
-}
 body[data-mode="dark"] .m3-nav-cta,
 body[data-mode="dark"] .m3-btn {
   background: var(--m3-ink);
@@ -475,12 +489,13 @@ body[data-mode="dark"] .m3-quote:hover {
   place-items: center;
   width: 32px;
   height: 32px;
-  background: var(--m3-ink);
-  color: var(--m3-bg);
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  background: #efece5;
+  color: #15130f;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  border-radius: 6px;
 }
 .m3-mark-name {
   font-family: "Newsreader", serif;
@@ -1073,12 +1088,13 @@ body[data-mode="dark"] .m3-quote:hover {
   place-items: center;
   width: 28px;
   height: 28px;
-  background: var(--m3-ink);
-  color: var(--m3-bg);
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  background: #efece5;
+  color: #15130f;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  border-radius: 5px;
 }
 .m3-foot-meta {
   display: flex;
@@ -1091,6 +1107,16 @@ body[data-mode="dark"] .m3-quote:hover {
   text-transform: uppercase;
 }
 .m3-foot-sep { color: var(--m3-rule); }
+.m3-foot-geo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.m3-foot-flag {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 1px;
+}
 .m3-foot-domain {
   color: var(--m3-ink-2);
   text-decoration: none;
