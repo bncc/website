@@ -157,6 +157,8 @@ function Variation3({ onWarp, retroHref }) {
           <div className="m3-foot-mark">
             <span className="m3-foot-glyph">{C.initials}</span>
             <span>{C.name}</span>
+            <span className="m3-foot-sep">·</span>
+            <a href="/" className="m3-foot-domain">{C.domain}</a>
           </div>
           <div className="m3-foot-meta">
             <span>© MMXXVI</span>
@@ -1089,6 +1091,13 @@ body[data-mode="dark"] .m3-quote:hover {
   text-transform: uppercase;
 }
 .m3-foot-sep { color: var(--m3-rule); }
+.m3-foot-domain {
+  color: var(--m3-ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s;
+}
+.m3-foot-domain:hover { border-bottom-color: var(--m3-ink-2); }
 
 /* Easter egg — disguised as the last footer meta item.
    Blends in until hover, when a faint glyph + accent reveal it. */

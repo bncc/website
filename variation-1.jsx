@@ -342,7 +342,7 @@ function Variation1({ onBack, backHref }) {
       <div className="v1-footer">
         <p>
           <font size="2">
-            <b>© MMXXVI {C.name}</b> &nbsp;·&nbsp; hand-coded HTML &nbsp;·&nbsp; no cookies &nbsp;·&nbsp; no trackers &nbsp;·&nbsp; no AI
+            <b>© MMXXVI {C.name}</b> &nbsp;·&nbsp; <a href="/">www.{C.domain}</a> &nbsp;·&nbsp; hand-coded HTML &nbsp;·&nbsp; no cookies &nbsp;·&nbsp; no trackers &nbsp;·&nbsp; no AI
           </font>
         </p>
         <p>
