@@ -23,6 +23,12 @@ function berlinTz() {
 
 function Variation3({ onWarp, retroHref }) {
   const C = window.SITE;
+  // Real testimonials only — placeholders like "— quote pending —" don't count.
+  // Until at least one real quote exists, the References section and its nav
+  // link are hidden, and a "references on request" line shows in Contact.
+  const hasReferences = (C.references || []).some(
+    q => q.text && !/quote pending/i.test(q.text)
+  );
   return (
     <div className="m3-page">
       <style>{m3_css}</style>
@@ -36,11 +42,12 @@ function Variation3({ onWarp, retroHref }) {
         <div className="m3-nav-links">
           <a href="#expertise">Expertise</a>
           <a href="#work">Work</a>
-          <a href="#references">References</a>
+          {hasReferences && <a href="#references">References</a>}
           <a href="#contact">Contact</a>
         </div>
         <a href={"mailto:" + C.email} className="m3-nav-cta">
-          {C.email}
+          <span className="m3-nav-cta-full">{C.email}</span>
+          <span className="m3-nav-cta-short">Email</span>
           <span className="m3-nav-cta-arr">↗</span>
         </a>
       </nav>
@@ -87,9 +94,7 @@ function Variation3({ onWarp, retroHref }) {
         <Sec id="expertise" num="01" label="Expertise">
           <div className="m3-sec-grid">
             <h2 className="m3-h2">What I'm <em>good at.</em></h2>
-            <p className="m3-sec-blurb">
-              Twenty years of doing this gives you a shape. Mine is here — the work I take on, and the work I send elsewhere.
-            </p>
+            <p className="m3-sec-blurb">{C.sections.expertise.blurb}</p>
           </div>
 
           <div className="m3-skills">
@@ -103,47 +108,49 @@ function Variation3({ onWarp, retroHref }) {
         <Sec id="work" num="02" label="Selected Work">
           <div className="m3-sec-grid">
             <h2 className="m3-h2">Things I've <em>shipped.</em></h2>
-            <p className="m3-sec-blurb">
-              A short selection of the work I'm most proud of. Full résumé on request — most of what matters is here.
-            </p>
+            <p className="m3-sec-blurb">{C.sections.work.blurb}</p>
           </div>
 
           <div className="m3-projects">
             {C.projects.map((p, i) => (
               <Project key={i} n={p.n} year={p.year} role={p.role} org={p.org}
-                title={p.title} body={p.body} metric={p.metric} metricLabel={p.metricLabel} />
+                title={p.title} body={p.body} metric={p.metric} metricLabel={p.metricLabel}
+                url={p.url} />
             ))}
           </div>
         </Sec>
 
         {/* ──────────── REFERENCES ──────────── */}
-        <Sec id="references" num="03" label="References">
-          <div className="m3-sec-grid">
-            <h2 className="m3-h2">What people <em>say.</em></h2>
-            <p className="m3-sec-blurb">
-              Published with permission. Direct introductions available on request — I keep an active list of references for any role I'm considered for.
+        {/* Hidden entirely while every quote is a placeholder (see hasReferences).
+            TODO(luca): see content.js sections.references — align with positioning. */}
+        {hasReferences && (
+          <Sec id="references" num="03" label="References">
+            <div className="m3-sec-grid">
+              <h2 className="m3-h2">What people <em>say.</em></h2>
+              <p className="m3-sec-blurb">{C.sections.references.blurb}</p>
+            </div>
+
+            <div className="m3-quotes">
+              {C.references.map((q, i) => (
+                <Quote key={i} text={q.text} name={q.name} role={q.role} relation={q.relation} />
+              ))}
+            </div>
+
+            <p className="m3-ref-foot">
+              For a longer list of references, including peers and direct reports, please <a href={"mailto:" + C.email} className="m3-inline-link">reach out by email</a>.
             </p>
-          </div>
-
-          <div className="m3-quotes">
-            {C.references.map((q, i) => (
-              <Quote key={i} text={q.text} name={q.name} role={q.role} relation={q.relation} />
-            ))}
-          </div>
-
-          <p className="m3-ref-foot">
-            For a longer list of references, including peers and direct reports, please <a href={"mailto:" + C.email} className="m3-inline-link">reach out by email</a>.
-          </p>
-        </Sec>
+          </Sec>
+        )}
 
         {/* ──────────── CONTACT ──────────── */}
         <Sec id="contact" num="04" label="Contact">
           <div className="m3-contact">
             <div className="m3-contact-left">
               <h2 className="m3-h2">Let's <em>talk.</em></h2>
-              <p className="m3-contact-blurb">
-                Email is best — I read everything, and reply to most things within a week. Not looking for work, advisory, or speaking gigs right now. Happy to swap notes on engineering management, or just say hi.
-              </p>
+              <p className="m3-contact-blurb">{C.contact.blurb}</p>
+              {!hasReferences && C.sections.references.onRequest && (
+                <p className="m3-contact-refs">{C.sections.references.onRequest}</p>
+              )}
               <a href={"mailto:" + C.email} className="m3-btn m3-btn-large">
                 {C.email}
                 <span className="m3-btn-arr">↗</span>
@@ -261,9 +268,9 @@ function Skill({ num, title, body, tags }) {
   );
 }
 
-function Project({ n, year, role, org, title, body, metric, metricLabel }) {
-  return (
-    <a href="#" className="m3-project">
+function Project({ n, year, role, org, title, body, metric, metricLabel, url }) {
+  const inner = (
+    <React.Fragment>
       <div className="m3-project-meta">
         <span className="m3-project-n">№ {n}</span>
         <span className="m3-project-year">{year}</span>
@@ -272,14 +279,19 @@ function Project({ n, year, role, org, title, body, metric, metricLabel }) {
         <div className="m3-project-role">{role} · {org}</div>
         <h3 className="m3-project-title">{title}</h3>
         <p className="m3-project-text">{body}</p>
-        <span className="m3-project-arrow">Read case study →</span>
+        {url && <span className="m3-project-arrow">Read case study →</span>}
       </div>
       <div className="m3-project-metric">
         <div className="m3-metric-n">{metric}</div>
         <div className="m3-metric-label">{metricLabel}</div>
       </div>
-    </a>
+    </React.Fragment>
   );
+  // Real link only when a case-study URL exists; otherwise a static card
+  // (no arrow, no dead href="#").
+  return url
+    ? <a href={url} className="m3-project">{inner}</a>
+    : <article className="m3-project">{inner}</article>;
 }
 
 function Quote({ text, name, role, relation }) {
@@ -384,7 +396,8 @@ body[data-mode="dark"][data-tint="graphite"] .m3-page {
   --m3-card: #1f1c17;
   --m3-ink: #efece5;
   --m3-ink-2: #aaa49a;
-  --m3-ink-3: #6e6a61;
+  /* tertiary: lightened from #6e6a61 to clear WCAG AA (~5:1) on #15130f */
+  --m3-ink-3: #8a8576;
   --m3-rule: #38342d;
   --m3-rule-soft: #28251f;
   --m3-accent-lit: color-mix(in oklab, var(--m3-accent) 48%, #efece5);
@@ -450,10 +463,10 @@ body[data-mode="dark"] .m3-tag {
 body[data-mode="dark"] .m3-nav-links a::after {
   background: var(--m3-accent-lit);
 }
-body[data-mode="dark"] .m3-project:hover {
+body[data-mode="dark"] a.m3-project:hover {
   background: linear-gradient(90deg, var(--m3-accent-soft), transparent 70%);
 }
-body[data-mode="dark"] .m3-project:hover .m3-project-arrow,
+body[data-mode="dark"] a.m3-project:hover .m3-project-arrow,
 body[data-mode="dark"] .m3-contact-row dd a:hover,
 body[data-mode="dark"] .m3-foot-top:hover {
   color: var(--m3-accent-lit);
@@ -479,7 +492,7 @@ body[data-mode="dark"] .m3-quote:hover {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 32px;
-  padding: 18px 56px;
+  padding: 18px clamp(20px, 5vw, 56px);
   background: color-mix(in oklab, var(--m3-bg) 88%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -557,12 +570,14 @@ body[data-mode="dark"] .m3-quote:hover {
 .m3-nav-cta:hover { background: var(--m3-accent); border-color: var(--m3-accent); transform: translateY(-1px); }
 .m3-nav-cta-arr { transition: transform .15s; }
 .m3-nav-cta:hover .m3-nav-cta-arr { transform: translate(2px, -2px); }
+.m3-nav-cta-full { display: inline; }
+.m3-nav-cta-short { display: none; }
 
 /* ════════════ LAYOUT ════════════ */
 .m3-main {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 56px;
+  padding: 0 clamp(20px, 5vw, 56px);
 }
 
 /* ════════════ HERO ════════════ */
@@ -625,8 +640,8 @@ body[data-mode="dark"] .m3-quote:hover {
 .m3-h1 {
   font-family: "Newsreader", serif;
   font-weight: 500;
-  font-size: 76px;
-  line-height: 1.02;
+  font-size: clamp(38px, 8.5vw, 76px);
+  line-height: 1.04;
   letter-spacing: -2.2px;
   margin: 0 0 32px;
   max-width: 14ch;
@@ -757,7 +772,7 @@ body[data-mode="dark"] .m3-quote:hover {
 .m3-h2 {
   font-family: "Newsreader", serif;
   font-weight: 500;
-  font-size: 56px;
+  font-size: clamp(30px, 6vw, 56px);
   line-height: 1.05;
   letter-spacing: -1.5px;
   margin: 0;
@@ -842,12 +857,13 @@ body[data-mode="dark"] .m3-quote:hover {
   transition: background .15s, padding .15s;
   align-items: start;
 }
-.m3-project:hover {
+a.m3-project { cursor: pointer; }
+a.m3-project:hover {
   background: linear-gradient(90deg, var(--m3-accent-soft), transparent 70%);
   padding-left: 16px;
   padding-right: 16px;
 }
-.m3-project:hover .m3-project-arrow {
+a.m3-project:hover .m3-project-arrow {
   color: var(--m3-accent);
   transform: translateX(4px);
 }
@@ -1028,6 +1044,14 @@ body[data-mode="dark"] .m3-quote:hover {
   margin: 0;
   max-width: 44ch;
 }
+.m3-contact-refs {
+  font-family: "Newsreader", serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--m3-ink-3);
+  margin: 0;
+  max-width: 44ch;
+}
 
 .m3-contact-list {
   margin: 0;
@@ -1078,7 +1102,7 @@ body[data-mode="dark"] .m3-quote:hover {
 .m3-foot-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 56px;
+  padding: 0 clamp(20px, 5vw, 56px);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 32px;
@@ -1180,6 +1204,89 @@ body[data-mode="dark"] .m3-quote:hover {
 .m3-foot-top:hover {
   color: var(--m3-accent);
   border-color: var(--m3-accent);
+}
+
+/* ════════════ RESPONSIVE ════════════
+   A few min-/max-width steps. Display type is already fluid via clamp();
+   these handle layout collapse and tighten tracking on the small sizes. */
+
+/* Tablet / small laptop: collapse the two-column intros */
+@media (max-width: 880px) {
+  .m3-sec-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+  .m3-contact { grid-template-columns: 1fr; gap: 40px; }
+  .m3-quotes { grid-template-columns: repeat(2, 1fr); }
+  .m3-section { padding: 64px 0; }
+}
+
+/* Phones: single-scroll nav, single-column content, no fixed side columns */
+@media (max-width: 720px) {
+  .m3-nav { grid-template-columns: auto 1fr; gap: 16px; }
+  .m3-nav-links { display: none; }
+  .m3-nav-cta { justify-self: end; }
+  .m3-nav-cta-full { display: none; }
+  .m3-nav-cta-short { display: inline; }
+
+  .m3-skills { grid-template-columns: 1fr; }
+
+  .m3-hero { padding: 56px 0; }
+  .m3-hero-actions { flex-wrap: wrap; margin-bottom: 48px; }
+
+  /* Projects restack: meta (number + year) on top, body, then metric */
+  .m3-project {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 28px 0;
+  }
+  a.m3-project:hover { padding-left: 0; padding-right: 0; }
+  .m3-project-meta {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+    padding-top: 0;
+  }
+  .m3-project-metric { text-align: left; padding-top: 0; }
+  .m3-metric-n { font-size: 30px; }
+
+  /* Footer collapses to one centered column */
+  .m3-foot-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .m3-foot-meta { flex-wrap: wrap; justify-content: center; }
+  .m3-foot-top { justify-self: center; }
+}
+
+/* Small phones: 2-up stats, looser/lighter tracking so tight kerning
+   doesn't crush the smaller display sizes */
+@media (max-width: 600px) {
+  .m3-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
+  .m3-quotes { grid-template-columns: 1fr; }
+  .m3-h1 { letter-spacing: -1px; }
+  .m3-h2 { letter-spacing: -0.6px; }
+  .m3-stat-n { font-size: 38px; }
+  .m3-skill { padding: 28px 22px; }
+}
+
+/* ════════════ REDUCED MOTION ════════════
+   Stop the pulsing availability dot and neutralise hover translate/transform. */
+@media (prefers-reduced-motion: reduce) {
+  .m3-dot { animation: none; }
+  .m3-project, a.m3-project:hover,
+  .m3-quote, .m3-quote:hover,
+  .m3-btn, .m3-btn:hover,
+  .m3-nav-cta, .m3-nav-cta:hover,
+  .m3-btn-arr, .m3-nav-cta-arr, .m3-project-arrow,
+  .m3-foot-egg-glyph {
+    transition: none;
+    transform: none;
+  }
 }
 `;
 

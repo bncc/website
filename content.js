@@ -31,7 +31,26 @@ window.SITE = {
   /* ════ MODERN SITE ════ */
   hero: {
     headline: "The teams I've seen do their best work all had the right <em>environment.</em> My job is to build it.",
-    lede: "Engineering manager with a solid technical base. Ten years leading diverse, multicultural teams in Hamburg and remote — across e-commerce, digitalization, and media. Focused on people development and the conditions that let engineers do their best work.",
+    lede: "Engineering manager with a solid technical base. Ten years leading diverse, multicultural teams in Hamburg and remote, across e-commerce, digitalization, and media. Focused on people development and the conditions that let engineers do their best work.",
+  },
+
+  /* Section intro blurbs (modern site). Copy lives here, per single-source-of-truth.
+     TODO(luca): pick one positioning and align hero pill + contact + references.
+     The hero availability pill (variation-3.jsx) currently shows only
+     "Hamburg · CET/CEST"; contact.blurb says "not looking for work/advisory/
+     speaking"; sections.references.blurb is framed around "any role I'm
+     considered for". These three signals contradict each other — pick a
+     direction and align all three. Wording left as-is until then. */
+  sections: {
+    expertise:  { blurb: "Twenty years of doing this gives you a shape. Mine is here: the work I take on, and the work I send elsewhere." },
+    work:       { blurb: "A short selection of the work I'm most proud of. Full résumé on request; most of what matters is here." },
+    references: {
+      blurb: "Published with permission. Direct introductions available on request, and I keep an active list of references for any role I'm considered for.",
+      onRequest: "References, including peers and direct reports, are available on request. Please reach out by email.",
+    },
+  },
+  contact: {
+    blurb: "Email is best: I read everything, and reply to most things within a week. Not looking for work, advisory, or speaking gigs right now. Happy to swap notes on engineering management, or just say hi.",
   },
 
   stats: [
@@ -46,19 +65,19 @@ window.SITE = {
     {
       num: "A",
       title: "People development",
-      body: "Developing individuals, hiring, performance, and growth. Clarity, honest feedback, and psychological safety aren't nice-to-haves — they're what makes delivery possible.",
+      body: "Developing individuals, hiring, performance, and growth. Clarity, honest feedback, and psychological safety aren't nice-to-haves: they're what makes delivery possible.",
       tags: ["1:1s", "Hiring", "Performance", "Growth", "Feedback"],
     },
     {
       num: "B",
       title: "Team leadership",
-      body: "Building and running cross-functional teams across cultures — Hamburg, remote, hybrid. From 5 up to 35 engineers, across 7 parallel teams at peak. Focused on team health, structure, and delivery.",
+      body: "Building and running cross-functional teams across cultures (Hamburg, remote, hybrid). From 5 up to 35 engineers, across 7 parallel teams at peak. Focused on team health, structure, and delivery.",
       tags: ["Cross-functional", "Multicultural", "Hybrid", "Team health", "Delivery"],
     },
     {
       num: "C",
       title: "Technical strategy",
-      body: "Translating product ambition into systems and organizations that can carry it. Roadmaps, technical direction, agile rollouts, vendor and partner decisions — and the brave 'no' that saves a quarter.",
+      body: "Translating product ambition into systems and organizations that can carry it. Roadmaps, technical direction, agile rollouts, vendor and partner decisions, and the brave 'no' that saves a quarter.",
       tags: ["Roadmaps", "Architecture", "Agile", "Vendors", "Org design"],
     },
     {
@@ -69,11 +88,13 @@ window.SITE = {
     },
   ],
 
-  /* Selected work / projects (shared — shown as cards on both) */
+  /* Selected work / projects (shared, shown as cards on both).
+     Add an optional `url` to a project to render its card as a real link
+     with a "Read case study" affordance; without it the card is static. */
   projects: [
     {
       n: "01",
-      year: "2026 — Now",
+      year: "2026–Now",
       role: "Engineering Manager",
       org: "Bitmovin",
       title: "Engineering Manager, VOD team",
@@ -83,7 +104,7 @@ window.SITE = {
     },
     {
       n: "02",
-      year: "2022 — 2025",
+      year: "2022–2025",
       role: "Head of Engineering",
       org: "SDA SE Open Industry Solutions",
       title: "7 cross-functional teams, 20–35 engineers",
@@ -93,17 +114,17 @@ window.SITE = {
     },
     {
       n: "03",
-      year: "2019 — 2021",
+      year: "2019–2021",
       role: "Tech Leader",
       org: "E-Farm",
       title: "Built and scaled the platform, 2 → 10 engineers",
-      body: "Grew the team and laid the foundations of a wider IT organization for the agricultural marketplace. Modernized the delivery stack — CI/CD, Docker, observability — and introduced agile from scratch. The core data system from that period is still in production today with minimal maintenance.",
+      body: "Grew the team and laid the foundations of a wider IT organization for the agricultural marketplace. Modernized the delivery stack (CI/CD, Docker, observability) and introduced agile from scratch. The core data system from that period is still in production today with minimal maintenance.",
       metric: "2 → 10",
       metricLabel: "team grown",
     },
     {
       n: "04",
-      year: "2015 — 2019",
+      year: "2015–2019",
       role: "Team Leader → Senior SWE",
       org: "BorderGuru",
       title: "Monolith to distributed services",
