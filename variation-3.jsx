@@ -281,10 +281,12 @@ function Project({ n, year, role, org, title, body, metric, metricLabel, url }) 
         <p className="m3-project-text">{body}</p>
         {url && <span className="m3-project-arrow">Read case study →</span>}
       </div>
-      <div className="m3-project-metric">
-        <div className="m3-metric-n">{metric}</div>
-        <div className="m3-metric-label">{metricLabel}</div>
-      </div>
+      {metric && (
+        <div className="m3-project-metric">
+          <div className="m3-metric-n">{metric}</div>
+          {metricLabel && <div className="m3-metric-label">{metricLabel}</div>}
+        </div>
+      )}
     </React.Fragment>
   );
   // Real link only when a case-study URL exists; otherwise a static card

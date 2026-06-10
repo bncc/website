@@ -42,7 +42,7 @@ window.SITE = {
      considered for". These three signals contradict each other — pick a
      direction and align all three. Wording left as-is until then. */
   sections: {
-    expertise:  { blurb: "Twenty years of doing this gives you a shape. Mine is here: the work I take on, and the work I send elsewhere." },
+    expertise:  { blurb: "Fifteen years of doing this gives you a shape. Mine is here: the work I take on, and the work I send elsewhere." },
     work:       { blurb: "A short selection of the work I'm most proud of. Full résumé on request; most of what matters is here." },
     references: {
       blurb: "Published with permission. Direct introductions available on request, and I keep an active list of references for any role I'm considered for.",
@@ -54,7 +54,7 @@ window.SITE = {
   },
 
   stats: [
-    { n: "20",  label: "Years in engineering" },
+    { n: "15",  label: "Years in engineering" },
     { n: "10",  label: "Years leading teams" },
     { n: "30+", label: "Engineers managed" },
     { n: "7",   label: "Parallel teams led" },
@@ -99,8 +99,10 @@ window.SITE = {
       org: "Bitmovin",
       title: "Engineering Manager, VOD team",
       body: "Responsible for team health, people development, and delivery on the Video-on-Demand team.",
-      metric: "VOD",
-      metricLabel: "team focus",
+      // TODO(luca): want a number here (team size, etc.)? Set metric + metricLabel.
+      // Left empty so the card renders without the large-serif metric block.
+      metric: "",
+      metricLabel: "",
     },
     {
       n: "02",
@@ -125,7 +127,7 @@ window.SITE = {
     {
       n: "04",
       year: "2015–2019",
-      role: "Team Leader → Senior SWE",
+      role: "Senior SWE → Team Leader",
       org: "BorderGuru",
       title: "Monolith to distributed services",
       body: "Led a cross-functional team of 6 engineers through the migration of an unstable monolithic core into autonomous, scalable services. Raised test coverage to shrink dev and bugfix cycles, and removed legacy components that were blocking the system's evolution.",
